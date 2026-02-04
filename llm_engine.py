@@ -1,45 +1,35 @@
-import os
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_groq import ChatGroq
-from langchain_community.memory import ConversationBufferMemory
+from langchain_core.messages import HumanMessage, AIMessage
+import os
 
-
-# LLM
+# Initialize Groq LLM
 llm = ChatGroq(
     model="gemma2-9b-it",
     temperature=0.3
 )
 
-# Memory (chat history)
-memory = ConversationBufferMemory(
-    return_messages=True
-)
-
-# Prompt
+# Prompt template with history placeholder
 prompt = ChatPromptTemplate.from_messages([
     (
         "system",
         "You are an intelligent, professional AI assistant. "
-        "Answer clearly, concisely, and helpfully. "
-        "If unsure, say you don't know."
+        "Answer clearly, concisely, and accurately. "
+        "If you are unsure, say you do not know."
     ),
     MessagesPlaceholder(variable_name="history"),
     ("human", "{input}")
 ])
 
-def get_ai_response(user_input: str) -> str:
-    history = memory.load_memory_variables({})["history"]
+def get_ai_response(user_input: str, chat_history: list) -> str:
+    """
+    chat_history: list of LangChain messages (HumanMessage, AIMessage)
+    """
 
     messages = prompt.format_messages(
-        history=history,
+        history=chat_history,
         input=user_input
     )
 
     response = llm.invoke(messages)
-
-    memory.save_context(
-        {"input": user_input},
-        {"output": response.content}
-    )
-
     return response.content
