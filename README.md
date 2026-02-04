@@ -295,7 +295,7 @@ Need help?
 
 ---
 
-**Made with ❤️ for the AI community**
+**Made with Sihab Safin for the AI community**
 
 ⭐ Star this repo if you find it useful!
 
