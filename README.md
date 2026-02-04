@@ -2,14 +2,14 @@
 
 A modern, conversational AI chatbot built using **Groq**, **LangChain**, and **Streamlit**.
 
-## 🚀 Features
+##  Features
 - Multi-turn conversational memory
 - Modern ChatGPT-style UI
 - Groq-powered LLM (fast & free)
 - Clean, production-ready architecture
 - Deployable via Streamlit Cloud
 
-## 🧠 Tech Stack
+##  Tech Stack
 - Groq (Gemma 2)
 - LangChain
 - Streamlit
