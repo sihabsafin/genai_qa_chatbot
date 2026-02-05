@@ -1,212 +1,750 @@
-/* Light Mode Theme */
+/* ============================================================================
+   ContextIQ - LIGHT MODE STYLES
+   Optimized for readability and beautiful light theme experience
+   ============================================================================ */
+
+/* ============================================================================
+   ROOT VARIABLES - Light Mode Color Palette
+   ============================================================================ */
+:root {
+    /* Primary Colors */
+    --primary-gradient-start: #6366f1;
+    --primary-gradient-end: #8b5cf6;
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    
+    /* Background Colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --bg-tertiary: #f3f4f6;
+    --bg-hover: #e5e7eb;
+    
+    /* Text Colors */
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-tertiary: #6b7280;
+    --text-muted: #9ca3af;
+    
+    /* Chat Bubble Colors */
+    --bubble-user-bg: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --bubble-user-text: #ffffff;
+    --bubble-bot-bg: #f9fafb;
+    --bubble-bot-text: #1f2937;
+    --bubble-bot-border: #e5e7eb;
+    
+    /* Button Colors */
+    --btn-primary-bg: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --btn-primary-hover: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    --btn-secondary-bg: #f3f4f6;
+    --btn-secondary-hover: #e5e7eb;
+    
+    /* Status Colors */
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --error-color: #ef4444;
+    --info-color: #3b82f6;
+    
+    /* Border Colors */
+    --border-color: #e5e7eb;
+    --border-hover: #d1d5db;
+    
+    /* Shadow */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================================================
+   GLOBAL STYLES
+   ============================================================================ */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ============================================================================
+   STREAMLIT OVERRIDES
+   ============================================================================ */
+.stApp {
+    background-color: var(--bg-primary) !important;
+}
 
 /* Main container */
-.stApp {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    color: #1f2937;
+.main .block-container {
+    background-color: var(--bg-primary) !important;
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
 }
 
-/* Chat bubbles - User */
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: var(--bg-secondary) !important;
+    border-right: 1px solid var(--border-color) !important;
+}
+
+section[data-testid="stSidebar"] > div {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* ============================================================================
+   CHAT BUBBLES - Light Mode
+   ============================================================================ */
 .chat-bubble-user {
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-    color: white;
-    padding: 16px 20px;
-    border-radius: 20px 20px 4px 20px;
-    margin: 12px 0;
-    max-width: 75%;
-    margin-left: auto;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-    animation: slideInRight 0.3s ease-out;
-    word-wrap: break-word;
+    background: var(--bubble-user-bg) !important;
+    color: var(--bubble-user-text) !important;
+    padding: 16px 20px !important;
+    border-radius: 18px 18px 4px 18px !important;
+    margin: 12px 0 !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    max-width: 80% !important;
+    box-shadow: var(--shadow-md) !important;
+    word-wrap: break-word !important;
+    line-height: 1.6 !important;
+    font-size: 15px !important;
 }
 
-/* Chat bubbles - Bot */
+.chat-bubble-user strong {
+    color: var(--bubble-user-text) !important;
+    font-weight: 600 !important;
+    display: block !important;
+    margin-bottom: 8px !important;
+    font-size: 13px !important;
+    opacity: 0.95 !important;
+}
+
 .chat-bubble-bot {
-    background: white;
-    color: #1f2937;
-    padding: 16px 20px;
-    border-radius: 20px 20px 20px 4px;
-    margin: 12px 0;
-    max-width: 75%;
-    margin-right: auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e5e7eb;
-    animation: slideInLeft 0.3s ease-out;
-    word-wrap: break-word;
+    background-color: var(--bubble-bot-bg) !important;
+    color: var(--bubble-bot-text) !important;
+    padding: 16px 20px !important;
+    border-radius: 18px 18px 18px 4px !important;
+    margin: 12px 0 !important;
+    margin-left: 0 !important;
+    max-width: 80% !important;
+    border: 1px solid var(--bubble-bot-border) !important;
+    box-shadow: var(--shadow-sm) !important;
+    word-wrap: break-word !important;
+    line-height: 1.6 !important;
+    font-size: 15px !important;
 }
 
-.chat-bubble-user strong,
 .chat-bubble-bot strong {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 12px;
-    opacity: 0.8;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* User Guide Styling */
-.user-guide {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    margin: 20px 0;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-.user-guide h2 {
-    color: #6366f1;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.user-guide h3 {
-    color: #8b5cf6;
-    margin-top: 25px;
-    margin-bottom: 15px;
-}
-
-.user-guide h4 {
-    color: #a78bfa;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-.user-guide ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.user-guide ul li {
-    padding: 8px 0;
-    padding-left: 25px;
-    position: relative;
-}
-
-.user-guide ul li:before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: #6366f1;
-    font-weight: bold;
-}
-
-.user-guide code {
-    background: #f3f4f6;
-    color: #7c3aed;
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.9em;
-    border: 1px solid #e5e7eb;
-}
-
-.example-section {
-    background: rgba(99, 102, 241, 0.05);
-    padding: 15px;
-    border-radius: 10px;
-    margin: 15px 0;
-    border-left: 3px solid #6366f1;
-}
-
-/* Animations */
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/* Sidebar styling */
-.css-1d391kg {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    color: var(--primary-color) !important;
+    font-weight: 600 !important;
+    display: block !important;
+    margin-bottom: 8px !important;
+    font-size: 13px !important;
 }
 
 /* Code blocks in chat */
-.chat-bubble-bot pre {
-    background: #f3f4f6;
-    padding: 12px;
-    border-radius: 8px;
-    overflow-x: auto;
-    margin: 8px 0;
-    border: 1px solid #e5e7eb;
+.chat-bubble-bot code,
+.chat-bubble-user code {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    color: #dc2626 !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
-.chat-bubble-bot code {
-    background: #e5e7eb;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.9em;
-    color: #7c3aed;
+.chat-bubble-bot pre,
+.chat-bubble-user pre {
+    background-color: #f3f4f6 !important;
+    padding: 12px !important;
+    border-radius: 8px !important;
+    overflow-x: auto !important;
+    margin: 8px 0 !important;
+    border: 1px solid var(--border-color) !important;
 }
 
-/* Links */
-.chat-bubble-bot a {
-    color: #6366f1;
-    text-decoration: underline;
+.chat-bubble-bot pre code,
+.chat-bubble-user pre code {
+    background-color: transparent !important;
+    border: none !important;
+    color: #1f2937 !important;
 }
 
-.chat-bubble-user a {
-    color: #fbbf24;
-    text-decoration: underline;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #6366f1;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #4f46e5;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .chat-bubble-user,
-    .chat-bubble-bot {
-        max-width: 90%;
-    }
-    
-    .user-guide {
-        padding: 20px;
-    }
-}
-
-/* Button hover effects */
+/* ============================================================================
+   BUTTONS - Light Mode
+   ============================================================================ */
 .stButton > button {
-    transition: all 0.3s ease;
+    background: var(--btn-primary-bg) !important;
+    color: var(--bubble-user-text) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 10px 24px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    box-shadow: var(--shadow-sm) !important;
 }
 
 .stButton > button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(99, 102, 241, 0.3);
+    background: var(--btn-primary-hover) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: var(--shadow-md) !important;
 }
+
+.stButton > button:active {
+    transform: translateY(0) !important;
+}
+
+/* Secondary buttons */
+button[kind="secondary"] {
+    background-color: var(--btn-secondary-bg) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+button[kind="secondary"]:hover {
+    background-color: var(--btn-secondary-hover) !important;
+    border-color: var(--border-hover) !important;
+}
+
+/* ============================================================================
+   INPUT FIELDS - Light Mode
+   ============================================================================ */
+.stTextInput > div > div > input,
+.stTextArea textarea,
+.stNumberInput input {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+}
+
+.stTextInput > div > div > input:focus,
+.stTextArea textarea:focus,
+.stNumberInput input:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+    outline: none !important;
+}
+
+.stTextInput > div > div > input::placeholder,
+.stTextArea textarea::placeholder {
+    color: var(--text-muted) !important;
+}
+
+/* Chat input */
+.stChatInput > div {
+    background-color: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 12px !important;
+}
+
+.stChatInput input {
+    background-color: transparent !important;
+    color: var(--text-primary) !important;
+    font-size: 15px !important;
+}
+
+.stChatInput input::placeholder {
+    color: var(--text-tertiary) !important;
+}
+
+/* ============================================================================
+   SELECTBOX & DROPDOWNS - Light Mode
+   ============================================================================ */
+.stSelectbox > div > div {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+}
+
+.stSelectbox > div > div:hover {
+    border-color: var(--border-hover) !important;
+}
+
+/* Dropdown menu */
+[data-baseweb="popover"] {
+    background-color: var(--bg-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+
+[data-baseweb="menu"] {
+    background-color: var(--bg-primary) !important;
+}
+
+[role="option"] {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+[role="option"]:hover {
+    background-color: var(--bg-hover) !important;
+}
+
+/* ============================================================================
+   SLIDERS - Light Mode
+   ============================================================================ */
+.stSlider {
+    padding: 8px 0 !important;
+}
+
+.stSlider > div > div > div {
+    background-color: var(--bg-tertiary) !important;
+}
+
+.stSlider > div > div > div > div {
+    background-color: var(--primary-color) !important;
+}
+
+.stSlider [role="slider"] {
+    background-color: var(--primary-color) !important;
+    box-shadow: var(--shadow-sm) !important;
+    border: 2px solid white !important;
+}
+
+/* ============================================================================
+   CHECKBOXES & RADIO - Light Mode
+   ============================================================================ */
+.stCheckbox {
+    color: var(--text-primary) !important;
+}
+
+.stCheckbox > label {
+    color: var(--text-primary) !important;
+}
+
+.stCheckbox input[type="checkbox"] {
+    border-color: var(--border-color) !important;
+    background-color: var(--bg-primary) !important;
+}
+
+.stCheckbox input[type="checkbox"]:checked {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.stRadio > label {
+    color: var(--text-primary) !important;
+}
+
+/* ============================================================================
+   EXPANDER - Light Mode
+   ============================================================================ */
+.streamlit-expanderHeader {
+    background-color: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+}
+
+.streamlit-expanderHeader:hover {
+    background-color: var(--bg-hover) !important;
+    border-color: var(--border-hover) !important;
+}
+
+.streamlit-expanderContent {
+    background-color: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-top: none !important;
+    border-radius: 0 0 8px 8px !important;
+    color: var(--text-primary) !important;
+}
+
+/* ============================================================================
+   METRICS - Light Mode
+   ============================================================================ */
+[data-testid="stMetricValue"] {
+    color: var(--text-primary) !important;
+    font-size: 28px !important;
+    font-weight: 600 !important;
+}
+
+[data-testid="stMetricLabel"] {
+    color: var(--text-secondary) !important;
+    font-size: 14px !important;
+}
+
+[data-testid="stMetricDelta"] {
+    font-size: 14px !important;
+}
+
+/* ============================================================================
+   DIVIDERS - Light Mode
+   ============================================================================ */
+hr {
+    border-color: var(--border-color) !important;
+    margin: 16px 0 !important;
+}
+
+/* ============================================================================
+   MARKDOWN & TEXT - Light Mode
+   ============================================================================ */
+.stMarkdown {
+    color: var(--text-primary) !important;
+}
+
+.stMarkdown h1,
+.stMarkdown h2,
+.stMarkdown h3 {
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+}
+
+.stMarkdown h1 {
+    font-size: 32px !important;
+}
+
+.stMarkdown h2 {
+    font-size: 24px !important;
+}
+
+.stMarkdown h3 {
+    font-size: 20px !important;
+}
+
+.stMarkdown p {
+    color: var(--text-primary) !important;
+    line-height: 1.6 !important;
+}
+
+.stMarkdown a {
+    color: var(--primary-color) !important;
+    text-decoration: none !important;
+}
+
+.stMarkdown a:hover {
+    color: var(--primary-hover) !important;
+    text-decoration: underline !important;
+}
+
+.stMarkdown code {
+    background-color: var(--bg-tertiary) !important;
+    color: #dc2626 !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.stMarkdown pre {
+    background-color: var(--bg-tertiary) !important;
+    padding: 16px !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--border-color) !important;
+    overflow-x: auto !important;
+}
+
+.stMarkdown pre code {
+    background-color: transparent !important;
+    border: none !important;
+    color: var(--text-primary) !important;
+}
+
+/* ============================================================================
+   CAPTIONS - Light Mode
+   ============================================================================ */
+.caption {
+    color: var(--text-tertiary) !important;
+    font-size: 12px !important;
+}
+
+.stCaption {
+    color: var(--text-tertiary) !important;
+    font-size: 12px !important;
+}
+
+/* ============================================================================
+   ALERTS & MESSAGES - Light Mode
+   ============================================================================ */
+.stAlert {
+    border-radius: 8px !important;
+    padding: 12px 16px !important;
+    border-left: 4px solid !important;
+}
+
+[data-testid="stNotification"] {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* Success */
+.stSuccess {
+    background-color: rgba(16, 185, 129, 0.1) !important;
+    border-left-color: var(--success-color) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Info */
+.stInfo {
+    background-color: rgba(59, 130, 246, 0.1) !important;
+    border-left-color: var(--info-color) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Warning */
+.stWarning {
+    background-color: rgba(245, 158, 11, 0.1) !important;
+    border-left-color: var(--warning-color) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Error */
+.stError {
+    background-color: rgba(239, 68, 68, 0.1) !important;
+    border-left-color: var(--error-color) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ============================================================================
+   SPINNER - Light Mode
+   ============================================================================ */
+.stSpinner > div {
+    border-color: var(--primary-color) !important;
+}
+
+/* ============================================================================
+   CUSTOM CLASSES - Light Mode
+   ============================================================================ */
+
+/* User Guide */
+.user-guide {
+    background-color: var(--bg-secondary) !important;
+    padding: 24px !important;
+    border-radius: 12px !important;
+    border: 1px solid var(--border-color) !important;
+    margin: 16px 0 !important;
+    color: var(--text-primary) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.user-guide h2 {
+    color: var(--primary-color) !important;
+    margin-bottom: 16px !important;
+}
+
+.user-guide h3 {
+    color: var(--text-primary) !important;
+    margin-top: 20px !important;
+    margin-bottom: 12px !important;
+}
+
+.user-guide h4 {
+    color: var(--primary-color) !important;
+    margin-top: 16px !important;
+}
+
+.user-guide ul {
+    color: var(--text-primary) !important;
+    line-height: 1.8 !important;
+}
+
+.user-guide code {
+    background-color: var(--bg-tertiary) !important;
+    color: #dc2626 !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.example-section {
+    margin: 16px 0 !important;
+    padding: 16px !important;
+    background-color: var(--bg-tertiary) !important;
+    border-radius: 8px !important;
+    border-left: 3px solid var(--primary-color) !important;
+}
+
+/* Action Buttons */
+.action-button {
+    display: inline-block !important;
+    padding: 6px 12px !important;
+    margin: 4px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+
+.copy-btn {
+    background-color: var(--success-color) !important;
+    color: white !important;
+}
+
+.copy-btn:hover {
+    background-color: #059669 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.regenerate-btn {
+    background-color: var(--info-color) !important;
+    color: white !important;
+}
+
+.regenerate-btn:hover {
+    background-color: #2563eb !important;
+    transform: translateY(-1px) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.export-btn {
+    background-color: var(--warning-color) !important;
+    color: white !important;
+}
+
+.export-btn:hover {
+    background-color: #d97706 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+/* Conversation Items */
+.conversation-item {
+    padding: 12px !important;
+    margin: 8px 0 !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    background-color: var(--bg-tertiary) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+.conversation-item:hover {
+    background-color: var(--bg-hover) !important;
+    border-color: var(--primary-color) !important;
+    transform: translateX(4px) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+/* Search Badge */
+.search-badge {
+    display: inline-block !important;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    color: white !important;
+    padding: 3px 10px !important;
+    border-radius: 12px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    margin-left: 8px !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* ============================================================================
+   SCROLLBAR - Light Mode
+   ============================================================================ */
+::-webkit-scrollbar {
+    width: 10px !important;
+    height: 10px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary) !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bg-tertiary) !important;
+    border-radius: 5px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bg-hover) !important;
+}
+
+/* ============================================================================
+   CARDS & CONTAINERS - Light Mode
+   ============================================================================ */
+.stCard {
+    background-color: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 12px !important;
+    padding: 16px !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+/* ============================================================================
+   TABLES - Light Mode
+   ============================================================================ */
+table {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-primary) !important;
+}
+
+thead {
+    background-color: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+}
+
+tbody tr {
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+tbody tr:hover {
+    background-color: var(--bg-hover) !important;
+}
+
+th, td {
+    color: var(--text-primary) !important;
+    padding: 12px !important;
+}
+
+/* ============================================================================
+   RESPONSIVE - Light Mode
+   ============================================================================ */
+@media (max-width: 768px) {
+    .chat-bubble-user,
+    .chat-bubble-bot {
+        max-width: 95% !important;
+        font-size: 14px !important;
+        padding: 12px 16px !important;
+    }
+    
+    .stButton > button {
+        padding: 8px 16px !important;
+        font-size: 13px !important;
+    }
+    
+    .user-guide {
+        padding: 16px !important;
+    }
+}
+
+/* ============================================================================
+   ACCESSIBILITY IMPROVEMENTS - Light Mode
+   ============================================================================ */
+
+/* Focus states */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid var(--primary-color) !important;
+    outline-offset: 2px !important;
+}
+
+/* High contrast for better readability */
+.stMarkdown strong {
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+}
+
+.stMarkdown em {
+    color: var(--text-secondary) !important;
+}
+
+/* ============================================================================
+   LOADING STATES - Light Mode
+   ============================================================================ */
+.stProgress > div > div {
+    background-color: var(--primary-color) !important;
+}
+
+/* ============================================================================
+   END OF LIGHT MODE STYLES
+   ============================================================================ */
