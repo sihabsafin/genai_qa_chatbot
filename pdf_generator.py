@@ -1,15 +1,16 @@
 """
 PDF Generator for User Guide
+Fixed: Removed emojis for fpdf2 compatibility
 """
 from fpdf import FPDF
 from datetime import datetime
 
 class UserGuidePDF(FPDF):
     def header(self):
-        # Logo/Title
+        # Logo/Title (removed emoji)
         self.set_font('Arial', 'B', 20)
         self.set_text_color(102, 126, 234)
-        self.cell(0, 10, '🤖 ContextIQ User Guide', 0, 1, 'C')
+        self.cell(0, 10, 'ContextIQ User Guide', 0, 1, 'C')
         self.ln(5)
     
     def footer(self):
@@ -169,6 +170,40 @@ def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
         "Max Length: Maximum response length (512-4096 tokens)\n\n"
         "System Prompt: Customize AI personality and behavior\n\n"
         "Theme: Toggle between dark and light mode"
+    )
+    
+    # Additional Features
+    pdf.chapter_title("Additional Features")
+    pdf.set_font('Arial', '', 11)
+    pdf.multi_cell(0, 6,
+        "Copy Responses: Click the copy button to save any AI response\n\n"
+        "Regenerate: Click the regenerate button to get a new response\n\n"
+        "Export: Download conversations as TXT or JSON files\n\n"
+        "Search: Find specific conversations in your history"
+    )
+    
+    # Getting Started
+    pdf.add_page()
+    pdf.chapter_title("Getting Started")
+    pdf.chapter_body(
+        "1. Choose your preferred AI model from the sidebar\n"
+        "2. Adjust settings if needed (temperature, max length)\n"
+        "3. Type your question in the chat box\n"
+        "4. Press Enter and receive your response\n"
+        "5. Continue the conversation naturally\n\n"
+        "Your conversations are automatically saved and can be accessed\n"
+        "anytime from the sidebar."
+    )
+    
+    # Tips for Best Results
+    pdf.chapter_title("Tips for Best Results")
+    pdf.set_font('Arial', '', 11)
+    pdf.multi_cell(0, 6,
+        "Be Clear: Provide context and be specific about what you need\n\n"
+        "Use Examples: Show examples of what you're looking for\n\n"
+        "Iterate: Don't hesitate to ask follow-up questions\n\n"
+        "Experiment: Try different models and settings for different tasks\n\n"
+        "Save Important Chats: Export conversations you want to keep"
     )
     
     # Footer
