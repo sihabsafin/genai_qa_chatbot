@@ -5,7 +5,6 @@ from fpdf import FPDF
 from datetime import datetime
 
 
-# Safe encoder
 def safe_text(text):
     return text.encode("latin-1", "replace").decode("latin-1")
 
@@ -32,7 +31,7 @@ class UserGuidePDF(FPDF):
     def chapter_body(self, body):
         self.set_font("Arial", "", 11)
         self.set_text_color(0, 0, 0)
-        self.multi_cell(0, 6, safe_text(body))
+        self.multi_cell(self.epw, 6, safe_text(body))
         self.ln()
 
 
@@ -40,6 +39,8 @@ def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
     pdf = UserGuidePDF()
     pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
+
+    epw = pdf.epw  # ✅ safe printable width
 
     # Introduction
     pdf.chapter_title("Welcome to ContextIQ!")
@@ -64,7 +65,7 @@ def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
     pdf.cell(0, 8, safe_text("Multi-Model Support"), 0, 1)
 
     pdf.set_font("Arial", "", 11)
-    pdf.multi_cell(0, 6, safe_text(
+    pdf.multi_cell(epw, 6, safe_text(
         "Choose from multiple AI models:\n"
         "- Llama 3.3 70B: Most powerful, best for complex tasks\n"
         "- Llama 3.1 70B: Fast and reliable\n"
@@ -77,7 +78,7 @@ def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
     pdf.cell(0, 8, safe_text("Conversation History"), 0, 1)
 
     pdf.set_font("Arial", "", 11)
-    pdf.multi_cell(0, 6, safe_text(
+    pdf.multi_cell(epw, 6, safe_text(
         "- All conversations are automatically saved\n"
         "- Browse and resume previous chats\n"
         "- Search through conversation history\n"
@@ -89,7 +90,7 @@ def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
     pdf.cell(0, 8, safe_text("Web Search Integration"), 0, 1)
 
     pdf.set_font("Arial", "", 11)
-    pdf.multi_cell(0, 6, safe_text(
+    pdf.multi_cell(epw, 6, safe_text(
         "- Access real-time information from the web\n"
         "- Get latest news and updates\n"
         "- Automatically cite sources\n"
@@ -101,7 +102,7 @@ def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
     pdf.cell(0, 8, safe_text("Streaming Responses"), 0, 1)
 
     pdf.set_font("Arial", "", 11)
-    pdf.multi_cell(0, 6, safe_text(
+    pdf.multi_cell(epw, 6, safe_text(
         "- See responses as they're generated\n"
         "- Stop generation at any time\n"
         "- Better experience for long responses"
@@ -146,8 +147,7 @@ def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
         pdf.set_font("Arial", "", 10)
 
         for prompt in prompts:
-            # ✅ FIXED: No manual cell indentation
-            pdf.multi_cell(0, 5, safe_text(f"- {prompt}"))
+            pdf.multi_cell(epw, 5, safe_text(f"- {prompt}"))
 
         pdf.ln(2)
 
@@ -169,7 +169,7 @@ def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
         pdf.cell(0, 7, safe_text(title), 0, 1)
 
         pdf.set_font("Arial", "", 10)
-        pdf.multi_cell(0, 5, safe_text(description))
+        pdf.multi_cell(epw, 5, safe_text(description))
         pdf.ln(2)
 
     # Settings
@@ -188,7 +188,7 @@ def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
     pdf.ln(10)
     pdf.set_font("Arial", "I", 10)
     pdf.set_text_color(128, 128, 128)
-    pdf.multi_cell(0, 5, safe_text(
+    pdf.multi_cell(epw, 5, safe_text(
         f"Generated on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
         "Powered by Groq | Built with LangChain | Hosted on Streamlit"
     ))
