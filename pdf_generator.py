@@ -5,42 +5,40 @@ from fpdf import FPDF
 from datetime import datetime
 
 
-# ✅ Helper function to safely encode text for FPDF
+# Safe encoder
 def safe_text(text):
     return text.encode("latin-1", "replace").decode("latin-1")
 
 
 class UserGuidePDF(FPDF):
     def header(self):
-        # Logo/Title (emoji removed to prevent crash)
-        self.set_font('Arial', 'B', 20)
+        self.set_font("Arial", "B", 20)
         self.set_text_color(102, 126, 234)
-        self.cell(0, 10, safe_text('ContextIQ User Guide'), 0, 1, 'C')
+        self.cell(0, 10, safe_text("ContextIQ User Guide"), 0, 1, "C")
         self.ln(5)
 
     def footer(self):
         self.set_y(-15)
-        self.set_font('Arial', 'I', 8)
+        self.set_font("Arial", "I", 8)
         self.set_text_color(128, 128, 128)
-        self.cell(0, 10, safe_text(f'Page {self.page_no()}'), 0, 0, 'C')
+        self.cell(0, 10, safe_text(f"Page {self.page_no()}"), 0, 0, "C")
 
     def chapter_title(self, title):
-        self.set_font('Arial', 'B', 14)
+        self.set_font("Arial", "B", 14)
         self.set_text_color(102, 126, 234)
-        self.cell(0, 10, safe_text(title), 0, 1, 'L')
+        self.cell(0, 10, safe_text(title), 0, 1)
         self.ln(2)
 
     def chapter_body(self, body):
-        self.set_font('Arial', '', 11)
+        self.set_font("Arial", "", 11)
         self.set_text_color(0, 0, 0)
         self.multi_cell(0, 6, safe_text(body))
         self.ln()
 
 
 def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
-    """Generate a comprehensive user guide PDF"""
-
     pdf = UserGuidePDF()
+    pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
 
     # Introduction
@@ -62,9 +60,10 @@ def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
     # Features
     pdf.chapter_title("Key Features")
 
-    pdf.set_font('Arial', 'B', 11)
+    pdf.set_font("Arial", "B", 11)
     pdf.cell(0, 8, safe_text("Multi-Model Support"), 0, 1)
-    pdf.set_font('Arial', '', 11)
+
+    pdf.set_font("Arial", "", 11)
     pdf.multi_cell(0, 6, safe_text(
         "Choose from multiple AI models:\n"
         "- Llama 3.3 70B: Most powerful, best for complex tasks\n"
@@ -74,9 +73,10 @@ def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
     ))
     pdf.ln(2)
 
-    pdf.set_font('Arial', 'B', 11)
+    pdf.set_font("Arial", "B", 11)
     pdf.cell(0, 8, safe_text("Conversation History"), 0, 1)
-    pdf.set_font('Arial', '', 11)
+
+    pdf.set_font("Arial", "", 11)
     pdf.multi_cell(0, 6, safe_text(
         "- All conversations are automatically saved\n"
         "- Browse and resume previous chats\n"
@@ -85,9 +85,10 @@ def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
     ))
     pdf.ln(2)
 
-    pdf.set_font('Arial', 'B', 11)
+    pdf.set_font("Arial", "B", 11)
     pdf.cell(0, 8, safe_text("Web Search Integration"), 0, 1)
-    pdf.set_font('Arial', '', 11)
+
+    pdf.set_font("Arial", "", 11)
     pdf.multi_cell(0, 6, safe_text(
         "- Access real-time information from the web\n"
         "- Get latest news and updates\n"
@@ -96,9 +97,10 @@ def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
     ))
     pdf.ln(2)
 
-    pdf.set_font('Arial', 'B', 11)
+    pdf.set_font("Arial", "B", 11)
     pdf.cell(0, 8, safe_text("Streaming Responses"), 0, 1)
-    pdf.set_font('Arial', '', 11)
+
+    pdf.set_font("Arial", "", 11)
     pdf.multi_cell(0, 6, safe_text(
         "- See responses as they're generated\n"
         "- Stop generation at any time\n"
@@ -138,12 +140,13 @@ def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
     ]
 
     for category, prompts in examples:
-        pdf.set_font('Arial', 'B', 12)
+        pdf.set_font("Arial", "B", 12)
         pdf.cell(0, 8, safe_text(category), 0, 1)
-        pdf.set_font('Arial', '', 10)
+
+        pdf.set_font("Arial", "", 10)
 
         for prompt in prompts:
-            pdf.cell(10)
+            # ✅ FIXED: No manual cell indentation
             pdf.multi_cell(0, 5, safe_text(f"- {prompt}"))
 
         pdf.ln(2)
@@ -162,9 +165,10 @@ def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
     ]
 
     for title, description in tips:
-        pdf.set_font('Arial', 'B', 11)
+        pdf.set_font("Arial", "B", 11)
         pdf.cell(0, 7, safe_text(title), 0, 1)
-        pdf.set_font('Arial', '', 10)
+
+        pdf.set_font("Arial", "", 10)
         pdf.multi_cell(0, 5, safe_text(description))
         pdf.ln(2)
 
@@ -182,13 +186,12 @@ def generate_user_guide_pdf(output_path="ContextIQ_User_Guide.pdf"):
 
     # Footer note
     pdf.ln(10)
-    pdf.set_font('Arial', 'I', 10)
+    pdf.set_font("Arial", "I", 10)
     pdf.set_text_color(128, 128, 128)
     pdf.multi_cell(0, 5, safe_text(
         f"Generated on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
         "Powered by Groq | Built with LangChain | Hosted on Streamlit"
     ))
 
-    # Save PDF
     pdf.output(output_path)
     return output_path
